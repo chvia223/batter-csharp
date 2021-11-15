@@ -11,6 +11,7 @@ namespace cse210_batter_csharp.Casting
             SetImage(Constants.IMAGE_BALL); 
             SetPosition(new Point(Constants.BALL_X, Constants.BALL_Y));
             SetVelocity(new Point(5,-5));
+        
         }
     }
 }
