@@ -15,17 +15,29 @@ namespace cse210_batter_csharp
 
             // Bricks
             cast["bricks"] = new List<Actor>();
-
-            // TODO: Add your bricks here
+            
+            for (int y = 5; y < 225; y+=44)
+            {
+                for (int x = 5; x < 795; x+=53)
+                {
+                    Brick brick = new Brick();
+                    brick.SetPosition(new Point(x,y));
+                    cast["bricks"].Add(brick);
+                }
+            }
 
             // The Ball (or balls if desired)
             cast["balls"] = new List<Actor>();
 
+            Ball ball = new Ball();
+            cast["balls"].Add(ball);
             // TODO: Add your ball here
 
             // The paddle
             cast["paddle"] = new List<Actor>();
 
+            Paddle paddle = new Paddle();
+            cast["paddle"].Add(paddle);
             // TODO: Add your paddle here
 
             // Create the script
@@ -42,6 +54,10 @@ namespace cse210_batter_csharp
 
             DrawActorsAction drawActorsAction = new DrawActorsAction(outputService);
             script["output"].Add(drawActorsAction);
+            
+
+            MoveActorsAction moveActorsAction = new MoveActorsAction();
+            script["update"].Add(moveActorsAction);
 
             // TODO: Add additional actions here to handle the input, move the actors, handle collisions, etc.
 
