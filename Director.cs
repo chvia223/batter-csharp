@@ -15,6 +15,7 @@ namespace cse210_batter_csharp
     /// </summary>
     public class Director
     {
+        private AudioService _audioService = new AudioService();
         private bool _keepPlaying = true;
         private Dictionary<string, List<Actor>> _cast;
         private Dictionary<string, List<Action>> _script;
@@ -36,13 +37,29 @@ namespace cse210_batter_csharp
                 CueAction("update");
                 CueAction("output");
 
+                if (_cast["balls"].Count == 0)
+                {
+                    _audioService.PlaySound(Constants.SOUND_OVER);
+                    _keepPlaying = false;
+                    Console.WriteLine("Game over!");
+                }
+
+                if (_cast["bricks"].Count == 0)
+                {
+                    _audioService.PlaySound(Constants.SOUND_OVER);
+                    _keepPlaying = false;
+                    Console.WriteLine("You win!");
+                }
+
                 if (Raylib_cs.Raylib.WindowShouldClose())
                 {
+                    _audioService.PlaySound(Constants.SOUND_OVER);
                     _keepPlaying = false;
+                    Console.WriteLine("Game over!");
                 }
             }
 
-            Console.WriteLine("Game over!");
+            
         }
 
         /// <summary>
