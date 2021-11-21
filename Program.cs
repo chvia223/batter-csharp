@@ -10,10 +10,10 @@ namespace cse210_batter_csharp
     {
         static void Main(string[] args)
         {
-            // Create the cast
+            // The Cast
             Dictionary<string, List<Actor>> cast = new Dictionary<string, List<Actor>>();
 
-            // Bricks
+            // The Bricks
             cast["bricks"] = new List<Actor>();
             
             for (int y = 5; y < 225; y+=44)
@@ -26,19 +26,17 @@ namespace cse210_batter_csharp
                 }
             }
 
-            // The Ball (or balls if desired)
+            // The Ball
             cast["balls"] = new List<Actor>();
 
             Ball ball = new Ball();
             cast["balls"].Add(ball);
-            // TODO: Add your ball here
 
             // The paddle
             cast["paddle"] = new List<Actor>();
 
             Paddle paddle = new Paddle();
             cast["paddle"].Add(paddle);
-            // TODO: Add your paddle here
 
             // Create the script
             Dictionary<string, List<Action>> script = new Dictionary<string, List<Action>>();
@@ -54,12 +52,15 @@ namespace cse210_batter_csharp
 
             DrawActorsAction drawActorsAction = new DrawActorsAction(outputService);
             script["output"].Add(drawActorsAction);
-            
+
+            ControlActorsAction controlActorsAction = new ControlActorsAction(inputService);
+            script["input"].Add(controlActorsAction);
 
             MoveActorsAction moveActorsAction = new MoveActorsAction();
             script["update"].Add(moveActorsAction);
 
-            // TODO: Add additional actions here to handle the input, move the actors, handle collisions, etc.
+            HandleCollisionsAction handleCollisionsAction = new HandleCollisionsAction(physicsService, audioService);
+            script["update"].Add(handleCollisionsAction);
 
             // Start up the game
             outputService.OpenWindow(Constants.MAX_X, Constants.MAX_Y, "Batter", Constants.FRAME_RATE);
