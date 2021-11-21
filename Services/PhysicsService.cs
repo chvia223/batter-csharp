@@ -41,6 +41,48 @@ namespace cse210_batter_csharp.Services
 
             return Raylib.CheckCollisionRecs(rectangle1, rectangle2);
         }
+
+        public bool IsHorizontalWallCollision(Actor actor)
+        {
+            return (actor.GetRightEdge() >= Constants.MAX_X || actor.GetLeftEdge() <= 0);
+        }
+
+
+        public bool IsTopWallCollision(Actor actor)
+        {
+            return actor.GetTopEdge() <= 0;
+        }
+
+        public bool IsBottomWallCollision(Actor actor)
+        {
+            return actor.GetBottomEdge() >= Constants.MAX_Y;
+        }
+
+        public bool IsHorizontalCollision(Actor actor1, Actor actor2)
+        {
+            if (actor1.GetLeftEdge() <= (actor2.GetRightEdge()) || 
+                actor1.GetRightEdge() >= (actor2.GetLeftEdge()))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool IsActorVerticalCollision(Actor actor1, Actor actor2)
+        {
+            if (actor1.GetTopEdge() <= (actor2.GetBottomEdge())  || 
+                actor1.GetBottomEdge() >= (actor2.GetTopEdge()))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
 }
