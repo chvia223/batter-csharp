@@ -10,8 +10,23 @@ namespace cse210_batter_csharp.Casting
             SetWidth(Constants.BALL_WIDTH);
             SetImage(Constants.IMAGE_BALL); 
             SetPosition(new Point(Constants.BALL_X, Constants.BALL_Y));
-            SetVelocity(new Point(5,-5));
-        
+            SetVelocity(new Point(Constants.BALL_DX,Constants.BALL_DY));     
+        }
+
+        public void VerticalBounce()
+        {
+            int dx = _velocity.GetX();
+            int dy = _velocity.GetY();
+
+            SetVelocity(new Point(dx, -dy));
+        }
+
+        public void HorizontalBounce()
+        {
+            int dx = _velocity.GetX();
+            int dy = _velocity.GetY();
+
+            SetVelocity(new Point(-dx, dy));
         }
     }
 }
